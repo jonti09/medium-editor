@@ -8,40 +8,50 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+// noinspection TypeScriptCheckImport
 import Gist from "pure-gist-embed";
+// noinspection TypeScriptCheckImport
 import _ from "underscore";
 
-export default {
-  props: ["content"],
-  methods: {
-    render() {
-      this.renderEmbed();
-    },
-    renderEmbed() {
-      const editorEmbeds = this.$refs.content.getElementsByClassName(
-        "editor-embed"
-      );
-      _.map(editorEmbeds, elm => {
-        const link = elm.getElementsByTagName("a")[0];
-        const nextElm = elm.nextElementSibling;
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-        if (nextElm.className.indexOf("gist-embed-iframe") > -1) {
-          nextElm.outerHTML = "";
-        }
+@Component({
+  name: "ReadMode"
+})
+export default class ReadMode extends Vue {
+  @Prop()
+  content: string;
 
-        if (link) {
-          const url = link.getAttribute("href");
-          this.renderEmbedElm(url, elm);
-        }
-      });
-    },
-    renderEmbedElm(url, elm) {
-      Gist.embed(url, elm);
-    }
-  },
+  render() {
+    this.renderEmbed();
+  }
+
+  renderEmbed() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const elem: any = this.$refs.content;
+    const editorEmbeds = elem.getElementsByClassName("editor-embed");
+    _.map(editorEmbeds, elm => {
+      const link = elm.getElementsByTagName("a")[0];
+      const nextElm = elm.nextElementSibling;
+
+      if (nextElm.className.indexOf("gist-embed-iframe") > -1) {
+        nextElm.outerHTML = "";
+      }
+
+      if (link) {
+        const url = link.getAttribute("href");
+        this.renderEmbedElm(url, elm);
+      }
+    });
+  }
+
+  renderEmbedElm(url, elm) {
+    Gist.embed(url, elm);
+  }
+
   mounted() {
     this.render();
   }
-};
+}
 </script>

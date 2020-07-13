@@ -45,16 +45,20 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: ["handler"],
-  methods: {
-    imageSizing(sizing) {
-      this.handler.currentSize = sizing;
-      this.handler.currentLine.className = "editor-image " + sizing;
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-      this.$emit("onPositionChange");
-    }
-  }
-};
+@Component({
+  name: "ImagePosition"
+})
+export default class ImagePosition extends Vue {
+  @Prop({ required: false, type: Object, default: { currentSize: "" } })
+  readonly handler: object;
+
+  imageSizing = size => {
+    this.handler["currentSize"] = size;
+    this.handler["currentLine"].className = "editor-image " + size;
+    this.$emit("onPositionChange");
+  };
+}
 </script>

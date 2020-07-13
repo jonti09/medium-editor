@@ -9,6 +9,7 @@ import { Component, Vue } from "vue-property-decorator";
 import AppEditor from "./components/AppEditor.vue";
 
 @Component({
+  name: "App",
   components: {
     AppEditor
   }

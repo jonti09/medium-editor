@@ -15,6 +15,11 @@
   </file-upload>
 </template>
 
-<script>
-export default {};
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+
+@Component({
+  name: "ImageHandler"
+})
+export default class ImageHandler extends Vue {}
 </script>

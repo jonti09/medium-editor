@@ -5,7 +5,6 @@
     :pre-fill="preFill"
     :options="options"
     :onChange="onChange"
-    v-on:uploaded="uploadCallback"
   >
   </editor>
 </template>
@@ -23,16 +22,10 @@ import { Component, Vue } from "vue-property-decorator";
 export default class AppEditor extends Vue {
   content = ``;
   preFill = `<h1><b>Medium Editor</b></h1>`;
-  options: object = {
-    uploadURL: ""
-  };
+  options: object = {};
 
   onChange = () => {
-    // console.log(this.content);
-  };
-
-  uploadCallback = url => {
-    // console.log("url", url);
+    return;
   };
 }
 </script>
