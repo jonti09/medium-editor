@@ -29,6 +29,8 @@
 <script lang="ts">
 // noinspection TypeScriptCheckImport
 import MediumEditor from "medium-editor";
+require("medium-editor/dist/css/themes/default.min.css");
+require("medium-editor/dist/css/medium-editor.min.css");
 // noinspection TypeScriptCheckImport
 import _ from "underscore";
 import InsertEmbed from "./helpers/InsertEmbed.vue";

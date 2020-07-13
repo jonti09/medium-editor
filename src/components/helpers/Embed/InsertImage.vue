@@ -4,6 +4,7 @@
       ref="image-upload-modal"
       hide-footer
       title="Choose the mode of upload"
+      :no-close-on-backdrop="true"
     >
       <b-container class="text-center">
         <b-row v-if="!unsplashClicked">
@@ -53,9 +54,10 @@ import VueUploadComponent from "vue-upload-component";
 import _ from "underscore";
 // noinspection TypeScriptCheckImport
 import * as MediumEditor from "medium-editor";
-import { Component, Emit, Prop, Vue, Watch } from "vue-property-decorator";
+import { Component, Emit, Mixins, Prop, Watch } from "vue-property-decorator";
 import { BCol, BContainer, BImg, BModal, BRow } from "bootstrap-vue";
 import UnsplashImage from "@/components/helpers/UnsplashImage.vue";
+import ImageMixin from "@/mixins/imageMixin";
 
 @Component({
   name: "InsertImage",
@@ -69,7 +71,7 @@ import UnsplashImage from "@/components/helpers/UnsplashImage.vue";
     BImg
   }
 })
-export default class InsertImage extends Vue {
+export default class InsertImage extends Mixins(ImageMixin) {
   @Prop()
   editor: MediumEditor;
 
@@ -139,7 +141,11 @@ export default class InsertImage extends Vue {
       );
 
       this.currentLine = this.editor.getSelectedParentElement().previousElementSibling;
-      const currentImg = this.currentLine.querySelector("img");
+      let currentImg = this.currentLine.querySelector("img");
+      setTimeout(() => {
+        currentImg = this.changeHeight(currentImg);
+        currentImg = this.changeOpacity(currentImg);
+      });
       const currentPos = currentImg?.getBoundingClientRect();
 
       if (currentPos) {
@@ -168,7 +174,7 @@ export default class InsertImage extends Vue {
 
   sizingHandler(elm) {
     const className = elm.className;
-    elm.className = className.replace("is-focus", "") + " is-focus";
+    elm.className = className.replace(" is-focus", "") + " is-focus";
     if (className.indexOf("expand") > -1) {
       this.currentSize = "is-expand";
     } else if (className.indexOf("full") > -1) {
@@ -253,8 +259,6 @@ export default class InsertImage extends Vue {
   position: relative;
 
   img {
-    opacity: 0.6;
-
     &:hover {
       cursor: pointer;
     }
@@ -270,6 +274,7 @@ export default class InsertImage extends Vue {
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     font-size: 2rem;
+    color: white;
   }
 }
 </style>

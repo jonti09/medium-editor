@@ -25,7 +25,6 @@ export default class App extends Vue {
 </script>
 <style lang="css">
 @import "~bulma/css/bulma.css";
-@import "~medium-editor/dist/css/medium-editor.css";
 @import "./themes/default.css";
 </style>
 

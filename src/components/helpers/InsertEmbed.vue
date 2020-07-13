@@ -20,7 +20,11 @@
         />
       </div>
     </div>
-    <image-position :handler="handler" v-on:onPositionChange="onChange" />
+    <image-position
+      :handler="handler"
+      @reset-image-container="resetImageContainer"
+      v-on:on-position-change="imageChangeHandler"
+    />
   </div>
 </template>
 
@@ -30,11 +34,12 @@ import ImagePosition from "./Embed/ImagePosition.vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Mixins, Prop, Vue } from "vue-property-decorator";
 // noinspection TypeScriptCheckImport
 import MediumEditor from "medium-editor";
 // noinspection TypeScriptCheckImport
 import _ from "underscore";
+import ImageMixin from "@/mixins/imageMixin";
 
 library.add(faPlus);
 
@@ -46,7 +51,7 @@ library.add(faPlus);
     FontAwesomeIcon
   }
 })
-export default class InsertEmbed extends Vue {
+export default class InsertEmbed extends Mixins(ImageMixin) {
   insert: object = {
     position: {
       top: "0",
@@ -66,7 +71,8 @@ export default class InsertEmbed extends Vue {
     position: {
       top: "0"
     },
-    isShow: false
+    isShow: false,
+    opacity: 100
   };
 
   @Prop()
@@ -161,9 +167,18 @@ export default class InsertEmbed extends Vue {
   toggle() {
     this.insert["isToggle"] = !this.insert["isToggle"];
   }
+  imageChangeHandler(handler) {
+    const imgElem = handler["currentLine"].querySelector("img");
+    this.changeHeight(imgElem, handler["currentSize"]);
+    this.changeOpacity(imgElem, handler["opacity"]);
+    this.onChange();
+  }
 
   imageClickHandler(value) {
-    this.handler = value;
+    this.handler = {
+      ...this.handler,
+      ...value
+    };
   }
 
   mounted() {
@@ -191,9 +206,11 @@ export default class InsertEmbed extends Vue {
       };
     }
   }
+
   beforeMount() {
     window.addEventListener("scroll", this.handleScroll);
   }
+
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);
   }

@@ -7,7 +7,7 @@
     height: 100%;
     margin: 0 auto;
     position: relative;
-    padding: 2rem 0;
+    padding: 0;
     font-size: 1.2rem;
 }
 
@@ -42,7 +42,6 @@
 }
 
 .medium-editor-container .medium-editor-placeholder::after {
-    color: rgba(var(--font-color), 0.5);
     max-width: 1000px;
     margin: 0 auto;
     display: block;
@@ -126,64 +125,6 @@
     font-style: italic;
 }
 
-.medium-toolbar-arrow-under:after {
-    border-color: #222526 transparent transparent transparent;
-    top: 48px;
-}
-
-.medium-toolbar-arrow-over:before {
-    border-color: transparent transparent #222526 transparent;
-}
-
-.medium-editor-toolbar {
-    background-color: var(--bg-color);
-    border: 1px solid #222526;
-    border-radius: 4px;
-}
-
-.medium-editor-toolbar li button {
-    background-color: transparent;
-    border: none;
-    border-right: 1px solid #222526;
-    box-sizing: border-box;
-    color: var(--font-color);
-    height: 48px;
-    min-width: 48px;
-    -webkit-transition: background-color .2s ease-in, color .2s ease-in;
-    transition: background-color .2s ease-in, color .2s ease-in;
-}
-
-.medium-editor-toolbar li button:hover {
-    background-color: transparent;
-    color: var(--primary-color);
-}
-
-.medium-editor-toolbar li .medium-editor-button-first {
-    border-bottom-left-radius: 4px;
-    border-top-left-radius: 4px;
-}
-
-.medium-editor-toolbar li .medium-editor-button-last {
-    border-bottom-right-radius: 4px;
-    border-right: none;
-    border-top-right-radius: 4px;
-}
-
-.medium-editor-toolbar li .medium-editor-button-active {
-    /*background-color: transparent;*/
-    /*color: #00BD6A;*/
-}
-
-.medium-editor-toolbar-anchor-preview {
-    background: #222526;
-    border-radius: 4px;
-    /*color: #fff;*/
-}
-
-.medium-editor-placeholder:after {
-    /*color: #222526;*/
-}
-
 .medium-editor-container * {
     outline: none;
 }
@@ -204,6 +145,7 @@
     font-size: 16px;
     color: var(--font-color);
     background-color: var(--bg-color);
+    outline: none;
 }
 
 .medium-editor-container .image-handler {
@@ -226,6 +168,7 @@
     font-size: 16px;
     color: var(--primary-color);
     background-color: var(--secondary-color);
+    outline: none;
 }
 
 .medium-editor-container .image-handler .btn-toggle img {
@@ -257,18 +200,15 @@
     position: relative;
 }
 
+.medium-editor-container .editor-image {
+    max-width: 100%;
+    overflow: hidden;
+}
+
 .medium-editor-container .editor-image img {
     width: 100%;
-    height: auto;
-    display: block;
-}
-
-.medium-editor-container .editor-image.is-expand {
-    max-width: 1200px;
-}
-
-.medium-editor-container .editor-image.is-full {
-    max-width: 100%;
+    object-fit: cover;
+    height: inherit;
 }
 
 .medium-editor-container .editor-image input {
@@ -287,6 +227,12 @@
 }
 
 .empty::after {
-    content: "Text Goes Here";
-    opacity: 0.5;
+    content: "text";
+    font-size: 2rem;
+    opacity: 0;
+}
+
+.is-focus {
+    resize: both;
+    overflow: auto;
 }
