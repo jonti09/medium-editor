@@ -31,9 +31,9 @@
 import MediumEditor from "medium-editor";
 // noinspection TypeScriptCheckImport
 import _ from "underscore";
-import InsertEmbed from "./libs/InsertEmbed.vue";
-import ListHandler from "./libs/ListHandler.vue";
-import ReadMode from "./libs/ReadMode.vue";
+import InsertEmbed from "./helpers/InsertEmbed.vue";
+import ListHandler from "./helpers/ListHandler.vue";
+import ReadMode from "./helpers/ReadMode.vue";
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component({
@@ -54,10 +54,10 @@ export default class Editor extends Vue {
   @Prop()
   preFill: string;
 
-  @Prop()
+  @Prop({ default: false })
   readOnly: boolean;
 
-  editor: MediumEditor;
+  editor: MediumEditor = null;
   defaultOptions: object = {
     forcePlainText: false,
     placeholder: {
@@ -110,13 +110,13 @@ export default class Editor extends Vue {
     }
   }
 
-  mounted() {
+  mounted(): void {
     if (!this.readOnly) {
       this.createElm();
     }
   }
 
-  destroyed() {
+  destroyed(): void {
     this.destroyElm();
   }
 }

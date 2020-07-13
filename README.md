@@ -20,5 +20,6 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Enable / Disable Unsplash integration
+To enable Unsplash integration, create a `.env` file in `frontend` directory. 
+Copy the content from `.env.sample` into it, and replace the variables with appropriate values.

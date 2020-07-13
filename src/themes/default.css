@@ -42,7 +42,7 @@
 }
 
 .medium-editor-container .medium-editor-placeholder::after {
-    color: #BBB;
+    color: rgba(var(--font-color), 0.5);
     max-width: 1000px;
     margin: 0 auto;
     display: block;
@@ -136,7 +136,7 @@
 }
 
 .medium-editor-toolbar {
-    background-color: #222526;
+    background-color: var(--bg-color);
     border: 1px solid #222526;
     border-radius: 4px;
 }
@@ -146,7 +146,7 @@
     border: none;
     border-right: 1px solid #222526;
     box-sizing: border-box;
-    color: #fff;
+    color: var(--font-color);
     height: 48px;
     min-width: 48px;
     -webkit-transition: background-color .2s ease-in, color .2s ease-in;
@@ -155,7 +155,7 @@
 
 .medium-editor-toolbar li button:hover {
     background-color: transparent;
-    color: #00BD6A;
+    color: var(--primary-color);
 }
 
 .medium-editor-toolbar li .medium-editor-button-first {
@@ -170,56 +170,18 @@
 }
 
 .medium-editor-toolbar li .medium-editor-button-active {
-    background-color: transparent;
-    color: #00BD6A;
-}
-
-.medium-editor-toolbar-form {
-    background: #222526;
-    border-radius: 4px;
-    color: #fff;
-}
-
-.medium-editor-toolbar-form .medium-editor-toolbar-input {
-    background: #222526;
-    color: #fff;
-    height: 48px;
-}
-
-.medium-editor-toolbar-form .medium-editor-toolbar-input::-webkit-input-placeholder {
-    color: #fff;
-    color: rgba(255, 255, 255, 0.8);
-}
-
-.medium-editor-toolbar-form .medium-editor-toolbar-input:-moz-placeholder {
-    /* Firefox 18- */
-    color: #fff;
-    color: rgba(255, 255, 255, 0.8);
-}
-
-.medium-editor-toolbar-form .medium-editor-toolbar-input::-moz-placeholder {
-    /* Firefox 19+ */
-    color: #fff;
-    color: rgba(255, 255, 255, 0.8);
-}
-
-.medium-editor-toolbar-form .medium-editor-toolbar-input:-ms-input-placeholder {
-    color: #fff;
-    color: rgba(255, 255, 255, 0.8);
-}
-
-.medium-editor-toolbar-form a {
-    color: #fff;
+    /*background-color: transparent;*/
+    /*color: #00BD6A;*/
 }
 
 .medium-editor-toolbar-anchor-preview {
     background: #222526;
     border-radius: 4px;
-    color: #fff;
+    /*color: #fff;*/
 }
 
 .medium-editor-placeholder:after {
-    color: #222526;
+    /*color: #222526;*/
 }
 
 .medium-editor-container * {
@@ -240,8 +202,8 @@
     height: 40px;
     border-radius: 50%;
     font-size: 16px;
-    color: #555;
-    background-color: #FFF;
+    color: var(--font-color);
+    background-color: var(--bg-color);
 }
 
 .medium-editor-container .image-handler {
@@ -250,10 +212,10 @@
     left: 50%;
     top: 100px;
     transform: translate(-50%, -20px);
-    background-color: rgba(0, 0, 0, 0.6);
     border-radius: 5px;
     padding-left: 10px;
     padding-right: 10px;
+    z-index: 99;
 }
 
 .medium-editor-container .image-handler .btn-toggle {
@@ -262,8 +224,8 @@
     height: 40px;
     border-radius: 50%;
     font-size: 16px;
-    color: #FFF;
-    background-color: transparent;
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
 }
 
 .medium-editor-container .image-handler .btn-toggle img {
@@ -292,46 +254,13 @@
     display: block;
     max-width: 1000px;
     margin: 2rem auto;
+    position: relative;
 }
 
 .medium-editor-container .editor-image img {
     width: 100%;
     height: auto;
     display: block;
-}
-
-.medium-editor-container .editor-image-description {
-    max-width: 1000px;
-    margin: 0 auto;
-    text-align: center;
-    margin-bottom: 2rem;
-    margin-top: -1rem;
-    font-size: 0.8rem;
-    color: #999;
-    position: relative;
-}
-
-.medium-editor-container .editor-image-description.is-empty::after {
-    content: "Image Description";
-    color: #BBB;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-}
-
-.medium-editor-container .editor-image + .editor-image-description.is-empty {
-    display: none;
-}
-
-.medium-editor-container .editor-image.is-focus + .editor-image-description.is-empty {
-    display: block;
-}
-
-.medium-editor-container .editor-image img:hover {
-    cursor: pointer;
 }
 
 .medium-editor-container .editor-image.is-expand {
@@ -343,7 +272,6 @@
 }
 
 .medium-editor-container .editor-image input {
-    margin: 0 auto;
     border: 0;
     display: block;
     font-size: 0.7rem;
@@ -351,18 +279,14 @@
     width: 100%;
     text-align: center;
     box-sizing: border-box;
-    color: #888;
-    margin-bottom: 2rem;
-}
-
-.medium-editor-container .editor-embed-container.is-inactive {
-    display: none;
-}
-
-.medium-editor-container .editor-embed-input.is-inactive {
-    display: none;
+    margin: 0 auto 2rem;
 }
 
 .medium-editor-container .editor-embed > a {
     display: none;
+}
+
+.empty::after {
+    content: "Text Goes Here";
+    opacity: 0.5;
 }
