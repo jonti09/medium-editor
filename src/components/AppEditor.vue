@@ -21,7 +21,7 @@ import { Component, Vue } from "vue-property-decorator";
 })
 export default class AppEditor extends Vue {
   content = ``;
-  preFill = `<h5>Start Writing Here</h5>`;
+  preFill = `<p><br></p>`;
   options: object = {};
 
   onChange = () => {

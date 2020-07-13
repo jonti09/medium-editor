@@ -141,6 +141,9 @@ export default class InsertImage extends Mixins(ImageMixin) {
       );
 
       this.currentLine = this.editor.getSelectedParentElement().previousElementSibling;
+      if (!this.currentLine) {
+        this.currentLine = this.editor.getSelectedParentElement();
+      }
       let currentImg = this.currentLine.querySelector("img");
       setTimeout(() => {
         currentImg = this.changeHeight(currentImg);
