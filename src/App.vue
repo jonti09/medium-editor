@@ -1,17 +1,22 @@
 <template>
   <div id="app">
-    <editor />
+    <app-editor />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import Editor from "./components/AppEditor.vue";
+import AppEditor from "./components/AppEditor.vue";
 
 @Component({
   components: {
-    Editor
+    AppEditor
   }
 })
 export default class App extends Vue {}
 </script>
+<style lang="css">
+@import "~bulma/css/bulma.css";
+@import "~medium-editor/dist/css/medium-editor.css";
+@import "./themes/default.css";
+</style>

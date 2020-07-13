@@ -1,34 +1,38 @@
 <template>
-  <div class="editor">
-    <h4>This is an feature rich editor!!</h4>
-  </div>
+  <editor
+    v-model="content"
+    :read-only="false"
+    :pre-fill="preFill"
+    :options="options"
+    :onChange="onChange"
+    v-on:uploaded="uploadCallback"
+  >
+  </editor>
 </template>
 
 <script lang="ts">
+import Editor from "./Editor.vue";
 import { Component, Vue } from "vue-property-decorator";
-import MediumEditor from "medium-editor/dist/js/medium-editor.min";
-import "medium-editor/dist/css/medium-editor.min.css";
-import "medium-editor/dist/css/themes/default.min.css";
 
-@Component
-export default class AppEditor extends Vue {
-  editor = null;
-
-  mounted() {
-    this.editor = new MediumEditor(".editor");
+@Component({
+  name: "AppEditor",
+  components: {
+    Editor
   }
+})
+export default class AppEditor extends Vue {
+  content = ``;
+  preFill = `<h1><b>Medium Editor</b></h1>`;
+  options: object = {
+    uploadURL: ""
+  };
+
+  onChange = () => {
+    // console.log(this.content);
+  };
+
+  uploadCallback = url => {
+    // console.log("url", url);
+  };
 }
 </script>
-
-<style lang="scss" scoped>
-[contenteditable]:focus {
-  outline: 0 solid transparent;
-}
-
-.editor {
-  border: none;
-  margin: 20px;
-  padding: 20px;
-  background-color: whitesmoke;
-}
-</style>
