@@ -42,7 +42,7 @@
         <vue-slider
           :value="handler['opacity']"
           v-model="handler['opacity']"
-          @change="onPositionChange"
+          @change="opacityChange"
         />
       </b-popover>
     </div>
@@ -84,6 +84,11 @@ export default class ImagePosition extends Vue {
 
   @Emit()
   resetImageContainer() {
+    return this.handler;
+  }
+
+  @Emit()
+  opacityChange() {
     return this.handler;
   }
 }

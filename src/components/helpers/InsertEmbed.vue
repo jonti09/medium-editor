@@ -23,6 +23,7 @@
     <image-position
       :handler="handler"
       @reset-image-container="resetImageContainer"
+      @opacity-change="opacityChange"
       v-on:on-position-change="imageChangeHandler"
     />
   </div>
@@ -167,10 +168,16 @@ export default class InsertEmbed extends Mixins(ImageMixin) {
   toggle() {
     this.insert["isToggle"] = !this.insert["isToggle"];
   }
+
+  opacityChange(handler) {
+    const imgElem = handler["currentLine"].querySelector("img");
+    this.changeOpacity(imgElem, handler["opacity"]);
+    this.onChange();
+  }
+
   imageChangeHandler(handler) {
     const imgElem = handler["currentLine"].querySelector("img");
     this.changeHeight(imgElem, handler["currentSize"]);
-    this.changeOpacity(imgElem, handler["opacity"]);
     this.onChange();
   }
 

@@ -7,7 +7,7 @@
     height: 100%;
     margin: 0 auto;
     position: relative;
-    padding: 0.5rem 0;
+    padding: 0;
     font-size: 1.2rem;
 }
 
@@ -154,7 +154,7 @@
     position: fixed;
     left: 50%;
     top: 100px;
-    transform: translate(-50%, -20px);
+    transform: translate(-50%, 0);
     border-radius: 5px;
     padding-left: 10px;
     padding-right: 10px;
@@ -197,7 +197,7 @@
 .medium-editor-container .editor-image {
     display: block;
     max-width: 1000px;
-    margin: 2rem auto;
+    margin: auto;
     position: relative;
 }
 
