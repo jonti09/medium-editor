@@ -135,7 +135,6 @@ export default class InsertImage extends Mixins(ImageMixin) {
             <img src="${data}" alt=""/>
             <div class="editor-image-description"></div>
           </div>
-          <br>
         `,
         { cleanAttrs: [], cleanTags: [], unwrapTags: [] }
       );
@@ -159,6 +158,11 @@ export default class InsertImage extends Mixins(ImageMixin) {
           });
         };
       }
+      this.editor.pasteHTML(`<p><br></p>`, {
+        cleanAttrs: [],
+        cleanTags: [],
+        unwrapTags: []
+      });
       this.unsplashClicked = false;
       this.insert["isToggle"] = false;
       this.insert["isShow"] = false;
@@ -267,10 +271,19 @@ export default class InsertImage extends Mixins(ImageMixin) {
     }
   }
 
-  .editor-image-description {
+  .editor-image-description,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  a,
+  blockquote {
     position: absolute;
-    text-align: center;
-    width: 100%;
+    text-align: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
     top: 50%;
     -moz-transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
@@ -278,6 +291,8 @@ export default class InsertImage extends Mixins(ImageMixin) {
     transform: translateY(-50%);
     font-size: 2rem;
     color: white;
+    z-index: 99;
+    margin: auto !important;
   }
 }
 </style>
